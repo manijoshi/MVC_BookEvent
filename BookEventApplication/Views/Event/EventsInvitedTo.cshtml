@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> _signInManager
+@inject UserManager<ApplicationUser> _userManager
+
+@model IEnumerable<EventModel>
+
+@{ ViewData["Title"] = "Index"; }
+@{
+    var user = await _userManager.GetUserAsync(User);
+    var email = user != null ? user.Email : "";
+
+}
+
+<div class="container">
+    <h1 class="text-info font-weight-bold">Event Invitied to</h1>
+    <hr />
+    <table class="table table-striped">
+        @foreach (var perevent in Model)
+        {
+            @if (!string.IsNullOrEmpty(perevent.InviteEmails))
+            {
+                List<string> invitees = perevent.InviteEmails.Split(',').ToList();
+
+                @foreach (var invitee in invitees)
+                {
+                    if (invitee.Contains(email))
+                    {
+                        <tr>
+                            <td class="text-center"><h4><a asp-controller="Event" asp-action="GetEventById" asp-route-id="@perevent.EventId">@perevent.Title</a></h4></td>
+                        </tr>
+                    }
+                }
+
+            }
+        }
+    </table>
+    </div>

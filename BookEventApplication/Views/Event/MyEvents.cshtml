@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<EventModel>
+
+<div class="container">
+    <h1 class="text-info font-weight-bold">My Events</h1>    <hr />
+    @if (User.Identity.Name == "myadmin@bookevents.com")
+    {
+        @foreach (var perevent in Model)
+        {
+
+            <table class="table table-striped">
+                <tr class="row justify-content-center">
+                    <td class="col-md-6"><h4><a asp-controller="Event" asp-action="GetEventById" asp-route-id="@perevent.EventId">@perevent.Title</a></h4></td>
+                    <td class="col-md-2"><h4><a asp-controller="Event" asp-action="EditEvent" asp-route-id="@perevent.EventId">Edit</a></h4></td>
+                </tr>
+            </table>
+
+        }
+    }
+    else
+    {
+        @foreach (var perevent in Model)
+        {
+            @if (perevent.Organiser == User.Identity.Name)
+            {
+                <table class="table table-striped">
+                    <tr class="row justify-content-center">
+                        <td class="col-md-6"><h4><a asp-controller="Event" asp-action="GetEventById" asp-route-id="@perevent.EventId">@perevent.Title</a></h4></td>
+                        <td class="col-md-2"><h4><a asp-controller="Event" asp-action="EditEvent" asp-route-id="@perevent.EventId">Edit</a></h4></td>
+                    </tr>
+                </table>
+            }
+        }
+    }
+
+
+</div>

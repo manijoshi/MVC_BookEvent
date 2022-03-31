@@ -1,0 +1,112 @@
+﻿@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<BookEventApplication.Models.EventModel>
+@inject SignInManager<ApplicationUser> _signInManager
+@inject UserManager<ApplicationUser> _userManager
+@{
+    var user = await _userManager.GetUserAsync(User);
+    var email = user != null ? user.Email : "";
+
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="container">
+        <div class="row ">
+
+
+            @if (_signInManager.IsSignedIn(User))
+            {
+                <div class="col">
+
+                    <strong>Past Events</strong>
+                    @if (email == "myadmin@bookevents.com")
+                    {
+                        foreach (var events in Model)
+                        {
+                            if (events.Date <= DateTime.Now.Date)
+                            {
+                                <p><a asp-controller="Event" asp-action="GetEventById" asp-route-id="@events.EventId">@events.Title</a></p>
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        foreach (var events in Model)
+                        {
+                            if (events.EventType == "Public" && events.Date < DateTime.Now.Date)
+                            {
+                                <p><a asp-controller="Event" asp-action="GetEventById" asp-route-id="@events.EventId">@events.Title</a></p>
+                            }
+
+                        }
+                    }
+                </div>
+                <div class="col">
+
+                    <strong>Upcoming Events</strong>
+                    @if (email == "myadmin@bookevents.com")
+                    {
+                        foreach (var events in Model)
+                        {
+                            if (events.Date >= DateTime.Now.Date)
+                            {
+                                <p><a asp-controller="Event" asp-action="GetEventById" asp-route-id="@events.EventId">@events.Title</a></p>
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        foreach (var events in Model)
+                        {
+                            if (events.EventType == "Public" && events.Date >= DateTime.Now.Date)
+                            {
+                                <p><a asp-controller="Event" asp-action="GetEventById" asp-route-id="@events.EventId">@events.Title</a></p>
+                            }
+
+                        }
+                    }
+
+
+                </div>
+
+
+            }
+            else
+            {
+                <div class="col">
+
+                   <strong>Past Events</strong>
+                   @foreach (var events in Model) 
+                    {
+                        if (events.EventType == "Public" && events.Date < DateTime.Now.Date)
+                        {
+                            <p><a asp-controller="Event" asp-action="GetEventById" asp-route-id="@events.EventId">@events.Title</a></p>
+                        }
+
+                    }
+                </div>
+                <div class="col">
+
+                    <strong>Upcoming Events</strong>
+                    @foreach (var events in Model)
+                    {
+                    if (events.EventType == "Public" && events.Date >= DateTime.Now.Date)
+                    {
+                    <p><a asp-controller="Event" asp-action="GetEventById" asp-route-id="@events.EventId">@events.Title</a></p>
+                    }
+
+                    }
+                </div>
+                }
+
+
+              </div>
+
+
+    </div>
+</div>

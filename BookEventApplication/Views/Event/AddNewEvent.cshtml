@@ -1,0 +1,84 @@
+﻿@using BookEventApplication.Models
+@model EventModel 
+
+
+<h1 class="text-info font-weight-bold">Create your Event</h1>
+<hr />
+@if(ViewBag.IsSuccess==true){ 
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Hye Creater!</strong> You should added new Event successfully.
+    
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form method="post" asp-action="AddNewEvent" asp-controller="Event">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label text-dark font-weight-bold">Title</label>
+                <input asp-for="Title" class="form-control input-sm" placeholder="Title.." />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label text-dark font-weight-bold">Date</label>
+                <input asp-for="Date" class="form-control" placeholder="Date..." />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartTime" class="control-label text-dark font-weight-bold">Start Time</label>
+                <input asp-for="StartTime" class="form-control" placeholder="Start Time..." />
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label text-dark font-weight-bold">Venue </label>
+                <input asp-for="Location" class="form-control" placeholder="Venue..." />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <input asp-for="Organiser" class="form-control" type="hidden" value="@User.Identity.Name" />
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label text-dark font-weight-bold">Description</label>
+                <input asp-for="Description" class="form-control" placeholder="Description..." />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherDetails" class="control-label text-dark font-weight-bold">Other Details</label>
+                <input asp-for="OtherDetails" class="form-control" placeholder="Other Details" />
+                <span asp-validation-for="OtherDetails" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Duration" class="control-label text-dark font-weight-bold">Duration</label>
+                <input asp-for="Duration" class="form-control" placeholder="Duration..." />
+                <span asp-validation-for="Duration" class="text-danger"></span>
+            </div>
+            <div class="form-group text-dark font-weight-bold">
+
+                <label asp-for="EventType" class="control-label text-dark font-weight-bold">Event Type</label>&nbsp;
+                <input asp-for="EventType" type="radio" name="eventType" value="Public" checked />&nbsp;Public&nbsp;
+                <input asp-for="EventType" type="radio" name="eventType" value="Private" />&nbsp;Private&nbsp;
+                <span class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="InviteEmails" class="control-label text-dark font-weight-bold"></label>
+                <input asp-for="InviteEmails" class="form-control" placeholder="Invitees..." />
+                <span asp-validation-for="InviteEmails" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-info btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+
