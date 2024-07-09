@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = EventTesting
+build_property.ProjectDir = D:\Dotnet_Practices\TokenAuth.API\BookEvent\EventTesting\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

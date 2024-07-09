@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = BookEventApplication
+build_property.ProjectDir = D:\Dotnet_Practices\TokenAuth.API\BookEvent\BookEventApplication\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

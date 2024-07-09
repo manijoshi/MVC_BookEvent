@@ -10,8 +10,8 @@ namespace BookEventApplication.Models
     {
         public int EventId { get; set; }
 
-        [Required(ErrorMessage = " Please Enter title of the book")]
-        [Display(Name = "Title of the Book")]
+        [Required(ErrorMessage = " Please Enter title of the Event")]
+        [Display(Name = "Title of the Event")]
         public string Title { get; set; }
 
 
